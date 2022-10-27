@@ -5,6 +5,11 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: 
+        - "S3:*"
+      Resource: "arn:aws:s3:::hider${opt:stage, 'dev'}/*"
   apiGateway:
     binaryMediaTypes:
       - 'multipart/form-data'
@@ -16,6 +21,7 @@ functions:
       - httpApi: 
           method : POST 
           path : /file/upload
+          cors : true
     environment:
       BUCKET: hider${opt:stage, 'dev'}
 resources:
@@ -25,36 +31,14 @@ resources:
       Properties:
         BucketName: hider${opt:stage, 'dev'}
         AccessControl: PublicRead
-    UploadRole:
-      Type: AWS::IAM::Role
-      Properties:
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                  - lambda.amazonaws.com
-              Action: sts:AssumeRole
-        Policies:
-          - PolicyName: upload-policy
-            PolicyDocument:
-              Version: "2012-10-17"
-              Statement:
-                - Effect: Allow
-                  Action:
-                    - s3:PutObject
-                    - s3:PutObjectAcl
-                  Resource:
-                    !Sub
-                      - "arn:aws:s3:::${BucketName}/*"
-                      - {BucketName: !Ref HiderBucket}
-                - Effect: Allow
-                  Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Resource:
-                    Fn::Sub:
-                      - arn:aws:logs:${Region}:${AccountId}:log-group:/aws/lambda/*:*:*
-                      - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId }
+        CorsConfiguration:
+          CorsRules:
+          - AllowedMethods:
+            - GET
+            - PUT
+            - POST
+            - HEAD
+            AllowedOrigins:
+            - "*"
+            AllowedHeaders:
+            - "*"
