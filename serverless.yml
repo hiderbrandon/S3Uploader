@@ -4,7 +4,10 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs14.x
+  apiGateway:
+    binaryMediaTypes:
+      - 'multipart/form-data'
 
 functions:
   uploader:
@@ -13,6 +16,12 @@ functions:
       - httpApi: 
           method : POST 
           path : /file/upload
-    role: UploadRole
     environment:
       BUCKET: modusland${opt:stage, 'dev'}
+resources:
+  Resources:
+    ModuslandBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: modusland
+        AccessControl: PublicRead
