@@ -1,0 +1,18 @@
+service: probando
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+functions:
+  uploader:
+    handler: handler.handle
+    events:
+      - httpApi: 
+          method : POST 
+          path : /file/upload
+    role: UploadRole
+    environment:
+      BUCKET: modusland${opt:stage, 'dev'}

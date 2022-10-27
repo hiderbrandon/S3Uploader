@@ -1,0 +1,16 @@
+{
+  "name": "probando",
+  "version": "1.0.0",
+  "description": "an aws micro-service to upload files to S3",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serverless",
+    "aws",
+    "nodejs"
+  ],
+  "author": "hider brandon vargas",
+  "license": "ISC"
+}

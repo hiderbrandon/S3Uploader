@@ -1,0 +1,9 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+#temporal files i use while coding
+erase_me
