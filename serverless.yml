@@ -23,5 +23,5 @@ resources:
     HiderBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: hider
+        BucketName: hider${opt:stage, 'dev'}
         AccessControl: PublicRead
