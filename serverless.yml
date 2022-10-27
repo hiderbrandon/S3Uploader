@@ -17,11 +17,11 @@ functions:
           method : POST 
           path : /file/upload
     environment:
-      BUCKET: modusland${opt:stage, 'dev'}
+      BUCKET: hider${opt:stage, 'dev'}
 resources:
   Resources:
-    ModuslandBucket:
+    HiderBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: modusland
+        BucketName: hider
         AccessControl: PublicRead
