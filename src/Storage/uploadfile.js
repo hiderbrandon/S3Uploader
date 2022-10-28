@@ -17,7 +17,7 @@ const uploadFileService = async (event)  =>{
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: err.stack })
+            body: JSON.stringify({ message: error.stack })
         }
     }
 
