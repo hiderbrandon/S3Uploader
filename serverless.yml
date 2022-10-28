@@ -5,9 +5,16 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: 
+        - "S3:*"
+      Resource: "arn:aws:s3:::hider${opt:stage, 'dev'}/*"
   apiGateway:
     binaryMediaTypes:
       - 'multipart/form-data'
+plugins:
+  - serverless-offline
 
 functions:
   uploader:
@@ -17,11 +24,22 @@ functions:
           method : POST 
           path : /file/upload
     environment:
-      BUCKET: modusland${opt:stage, 'dev'}
+      BUCKET: hider${opt:stage, 'dev'}
 resources:
   Resources:
-    ModuslandBucket:
+    HiderBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: modusland
+        BucketName: hider${opt:stage, 'dev'}
         AccessControl: PublicRead
+        CorsConfiguration:
+          CorsRules:
+          - AllowedMethods:
+            - GET
+            - PUT
+            - POST
+            - HEAD
+            AllowedOrigins:
+            - "*"
+            AllowedHeaders:
+            - "*"
