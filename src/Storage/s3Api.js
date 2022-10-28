@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 const BUCKET = process.env.BUCKET;
 const s3 = new AWS.S3();
  
-const s3Api = async (filename, data) => {
+const uploadFile = async (filename, data) => {
   try {
     
     await s3.putObject({ Bucket: BUCKET, Key: filename, ACL: 'public-read', Body: data }).promise();
@@ -19,4 +19,4 @@ const s3Api = async (filename, data) => {
   }
 }
 
-module.exports = s3Api;
+module.exports = uploadFile;
