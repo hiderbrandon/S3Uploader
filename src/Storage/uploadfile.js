@@ -4,7 +4,7 @@ const parseMultipart = require('parse-multipart');
 const uploadFileService = async (event)  =>{
     try {
         const { filename, data } = extractFile(event);
-        let myLink = uploadFile(filename ,data);
+        let myLink = await uploadFile(filename ,data);
         console.log(`\n============uploadFile==========\n${JSON.stringify(myLink)}\n===========================\n`);
         return myLink;
 
