@@ -12,5 +12,8 @@
     "nodejs"
   ],
   "author": "hider brandon vargas",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "parse-multipart": "^1.0.4"
+  }
 }
