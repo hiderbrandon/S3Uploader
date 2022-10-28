@@ -19,4 +19,4 @@ const s3Api = async (filename, data) => {
   }
 }
 
-module.export= s3Api;
+module.exports = s3Api;

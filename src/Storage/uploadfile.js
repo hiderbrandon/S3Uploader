@@ -1,4 +1,4 @@
-const {s3Api} = require(`./s3Api`);
+const s3Api = require(`./s3Api`);
 const parseMultipart = require('parse-multipart');
 
 const uploadFile = async (event)  =>{
@@ -26,4 +26,4 @@ const extractFile = (event) => {
     }
 }
 
-module.export= uploadFile;
+module.exports = uploadFile;
