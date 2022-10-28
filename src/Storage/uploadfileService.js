@@ -6,7 +6,7 @@ const uploadFile = require(`./s3Api`);
 const uploadFileService = async (event)  =>{
     try {
         const { filename, data } = extractFile(event);
-        await uploadFile(filename ,data);
+        await uploadFile(filename ,data , BUCKET);
         myLink = {
             statusCode: 200,
             body: JSON.stringify({ link: `https://${BUCKET}.s3.amazonaws.com/${filename}` })
