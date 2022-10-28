@@ -13,6 +13,8 @@ provider:
   apiGateway:
     binaryMediaTypes:
       - 'multipart/form-data'
+plugins:
+  - serverless-offline
 
 functions:
   uploader:
